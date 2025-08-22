@@ -10,63 +10,48 @@ function getComputerChoice() {
    }
 }
 
-
-function getHumanChoice() {
-   let answer = prompt("Rock, Paper, Scissors?");
-   if (!answer) return getHumanChoice();
-   answer = answer.toLowerCase().trim();
-
-   if (answer === "rock" || answer === "paper" || answer === "scissors") {
-    return answer;
-   } else {
-    console.log("Invalid Choice. Please enter rock, paper, or scissors.");
-    return getHumanChoice()
-   }
-}
-
-
-
-
 function playGame() {
 
     let humanScore = 0;
     let computerScore = 0;
 
     function playRound(getHumanChoice, getComputerChoice) {
-    if (getHumanChoice === "rock" && getComputerChoice === "paper") {
-        (console.log("You Lose! Paper beats Rock") + computerScore++);
-    } else if (getHumanChoice === "paper" && getComputerChoice === "rock") {
-        (console.log("You Win! Paper beats Rock") && humanScore++);
-    } else if (getHumanChoice === "paper" && getComputerChoice === "scissors") {
-        (console.log("You Lose! Scissors beats Paper") + computerScore++);
-    } else if (getHumanChoice === "scissors" && getComputerChoice === "paper") {
-        (console.log("You Win! Scissors beats Paper") && humanScore++);
-    } else if (getHumanChoice === "scissors" && getComputerChoice === "rock") {
-        (console.log("You Lose! Rock beats Scissors") + computerScore++); 
-    } else if (getHumanChoice === "rock" && getComputerChoice === "scissors") {
-        (console.log("You Win! Rock beats Scissors") + humanScore++);
+    if (getHumanChoice === getComputerChoice) {
+        console.log("You Tied!");
+    } else if (
+        (getHumanChoice === "paper" && getComputerChoice === "rock") ||
+        (getHumanChoice === "scissors" && getComputerChoice === "paper") ||
+        (getHumanChoice === "rock" && getComputerChoice === "scissors")
+    ){
+        humanScore++;
+        console.log(`You Win! ${getHumanChoice} beats ${getComputerChoice}`);
     } else {
-        console.log("You Tied!")
+        computerScore++;
+        console.log(`You Lose! ${getComputerChoice} beats ${getHumanChoice}`)
     }
+
     console.log(`Your Score: ${humanScore} - Computer ${computerScore}`);
 }  
     
-    for (let i = 0; i < 5; i++) {
+    // for (let i = 0; i < 5; i++) {
         
-    const humanSelection = getHumanChoice();
-    const computerSelection = getComputerChoice();
+    const selection = document.querySelector("#selection")
 
-    playRound(humanSelection, computerSelection);
-}
+        selection.addEventListener("click", (e) => {
+            const getHumanChoice = e.target.id;
+            const computerSelection = getComputerChoice();
+            playRound(getHumanChoice, computerSelection)
+        });
+// }
 
 
-    if (humanScore > computerScore) {
-        console.log("You Win the game!")
-    } else if (computerScore > humanScore) {
-        console.log("You Lose the game!")
-    } else {
-        console.log("You Tied the game!")
-    }
+    // if (humanScore > computerScore) {
+    //     console.log("You Win the game!")
+    // } else if (computerScore > humanScore) {
+    //     console.log("You Lose the game!")
+    // } else {
+    //     console.log("You Tied the game!")
+    // }
 
 }
 
